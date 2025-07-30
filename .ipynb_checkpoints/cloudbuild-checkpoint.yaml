@@ -1,0 +1,28 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/airy-shadow-465511-v9/python-app/loan-prediction', '.']
+  timeout: "600s"
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/airy-shadow-465511-v9/python-app/loan-prediction']
+  timeout: "600s"
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+   - 'run'
+   - 'deploy'
+   - 'loan-prediction'
+   - '--image'
+   - 'us-central1-docker.pkg.dev/airy-shadow-465511-v9/python-app/loan-prediction'
+   - '--region'
+   - 'us-central1'
+   - '--allow-unauthenticated'
+  timeout: "600s"
+
+images:
+  - 'us-central1-docker.pkg.dev/airy-shadow-465511-v9/python-app/loan-prediction'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

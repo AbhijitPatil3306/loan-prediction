@@ -1,0 +1,10 @@
+,dtype
+loan_amount,int32
+interest_rate,float64
+borrower_income,int32
+debt_to_income_ratio,float64
+FICO_score,int32
+employment_length,int64
+loan_purpose,int64
+income_to_loan_ratio,float64
+debt_burden,float64
